@@ -1,5 +1,5 @@
 
-C:\Users\Administrator\Desktop\PS-Study\BOJ>g++ -std=c++11 -O2 -o tmp/main 13565.cpp 
+C:\Users\Administrator\Desktop\PS-Study\BOJ>g++ -std=c++11 -O2 -o tmp/main 1504.cpp 
 
 C:\Users\Administrator\Desktop\PS-Study\BOJ>tmp\main.exe  0<input.txt 
-YES
+7
