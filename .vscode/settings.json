@@ -20,6 +20,10 @@
         "regex": "cpp",
         "stack": "cpp",
         "valarray": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp",
+        "xcomplex": "cpp",
+        "xlocale": "cpp"
     }
 }
