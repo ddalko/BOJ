@@ -1,0 +1,30 @@
+
+C:\Users\Administrator\Desktop\PS-Study\Codeforces\#412>g++ -std=c++11 -O2 -o tmp/main B.cpp 
+
+C:\Users\Administrator\Desktop\PS-Study\Codeforces\#412>tmp\main.exe  0<input.txt 
+223
+455
+402
+64
+391
+433
+190
+137
+274
+126
+168
+400
+347
+484
+336
+378
+135
+82
+219
+71
+113
+345
+292
+429
+281
+323
