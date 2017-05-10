@@ -3,20 +3,19 @@
 
 using namespace std;
 
-int p[1002];
-int dp[1002];
+int n;
+int p[1005];
+int dp[1005];
 
 int main()
 {
-    int n;
     scanf("%d",&n);
-    for(int i=1;i<=n;++i) scanf("%d",p+i);
+    for(int i = 1; i <= n; ++i) scanf("%d",p+i);
 
-    for(int i=1;i<=n;++i){
-        for(int j=1;j<=i;++j){
-            dp[i] = max(dp[i], dp[i-j]+p[j]);
+    for(int i = 0; i < n; ++i){
+        for(int j = 1; j <= n; ++j){
+            if(i + j <= n) dp[i + j] = max(dp[i + j], dp[i] + p[j]);
         }
     }
-
     printf("%d\n",dp[n]);
 }
