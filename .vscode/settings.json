@@ -24,6 +24,7 @@
         "cmath": "cpp",
         "complex": "cpp",
         "xcomplex": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "xiosbase": "cpp"
     }
 }

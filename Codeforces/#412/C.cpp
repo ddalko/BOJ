@@ -1,18 +1,28 @@
-#include <cstdio>
+#include <bits/stdc++.h>
 
-int gcd(int a, int b)
-{
-    return (b == 0) ? a : gcd(b, a%b);
-}
+using namespace std;
 
 int main()
 {
+    ios::sync_with_stdio(0);
     int t;
-    int x, y, p, q;
-    int u, v;
+    cin >> t;
+    while(t--){
+        int x, y, p, q;
+        cin >> x >> y >> p >> q;
+        
+        if(p == 0){
+            cout << (x == 0 ? 0 : -1) << '\n';
+            continue;
+        }
 
-    for(scanf("%d",&t);t--;){
-        scanf("%d %d %d %d",&x,&y,&p,&q);
-        if()    
+        if(p == q){
+            cout << (x == y ? 0 : -1) << '\n';
+            continue;
+        }
+
+        int t1 = (x + p - 1) / p;
+        int t2 = ((y - x) + (q - p) - 1) / (q - p);
+        cout << (q * 1LL * max(t1, t2) - y) << '\n';
     }
 }
