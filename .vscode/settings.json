@@ -25,6 +25,9 @@
         "complex": "cpp",
         "xcomplex": "cpp",
         "xlocale": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "xlocbuf": "cpp"
     }
 }
