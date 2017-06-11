@@ -1,4 +1,6 @@
-#include <cstdio>
+#include <bits/stdc++.h>
+
+using namespace std;
 
 const char *number[10][5] = {
     {"###", "#.#", "#.#", "#.#", "###"},
@@ -13,16 +15,14 @@ const char *number[10][5] = {
     {"###", "#.#", "###", "..#", "###"}
 };
 
-int n;
-char input[5][36];
-char parse[10][5][3];
+string input[5];
+char parse[4][5][3];
 
 int main()
 {
-    scanf("%d",&n);
-    for(int i = 0; i < 5; ++i) scanf("%s",input[i]);
-
-    for(int k = 0; k < n; ++k){
+    for(int i = 0; i < 5; ++i) getline(cin, input[i]);
+    
+    for(int k = 0; k < 4; ++k){
         int c = 4 * k;
         for(int i = 0; i < 5; ++i){
             for(int j = 0; j < 3; ++j){
@@ -31,16 +31,21 @@ int main()
         }
     }
 
-    for(int n = 0; n < 10; ++n){
-        bool flag = false;
-        
-        for(int i = 0; i < 5; ++i){
-            for(int j = 0; j < 3; ++j){
-                if(parse[0][i][j] == '#' && number[n][i][j] == '.') flag = true;
+    int M[4] = {2, 9, 5, 9};
+    for(int k = 0; k < 4; ++k){
+        for(int N = 0; N <= M[k]; ++N){
+
+            bool flag = false;
+            for(int i = 0; i < 5; ++i){
+                for(int j = 0; j < 3; ++j){ 
+                    if(parse[k][i][j] == '#' && number[N][i][j] == '.') flag = true;
+                }
+            }
+            if(!flag){
+                printf("%d",N);
+                break;
             }
         }
-        
-        if(flag) printf("%d Un Matched!\n", n);
-        else printf("%d Matched!\n", n);
+        if(k == 1) printf(":");
     }
 }

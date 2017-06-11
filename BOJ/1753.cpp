@@ -1,53 +1,61 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <queue>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
-#define mp make_pair
-#define eb emplace_back
 typedef pair<int,int> pii;
 
-int v, e;
+int v, e, src;
 int dist[20005];
-vector<pii> g[20005]; 
+int in_q[20005];
+vector<pii> g[20005];
 
-void dijkstra(int src)
+void spfa(int src)
 {
-    for(int i = 1; i <= v; ++i) dist[i] = 1e9;
-
-    priority_queue<pii, vector<pii>, greater<pii> > pq;
+    for(int i = 0; i <= v; ++i) dist[i] = 1e9;
+    
     dist[src] = 0;
-    pq.push(mp(0, src));
+    queue<int> q;
+    q.push(src);
+    in_q[src] = true;
 
-    while(!pq.empty()){
-        int cur = pq.top().second;
-        int cost = pq.top().first;
-        pq.pop();
+    while(!q.empty())
+    {
+        int curNode = q.front();
+        q.pop();
+        in_q[curNode] = false;
+    
+        for(int i = 0; i < (int)g[curNode].size(); ++i){
+            int nxtNode = g[curNode][i].first;
+            int nxtCost = g[curNode][i].second;
 
-        if(dist[cur] < cost) continue;
+            if(dist[nxtNode] > dist[curNode] + nxtCost)
+            {
+                dist[nxtNode] = dist[curNode] + nxtCost;
 
-        for(int i = 0; i < (int)g[cur].size(); ++i){
-            int nxt = g[cur][i].first;
-            int nxtCost = cost + g[cur][i].second;
-
-            if(dist[nxt] > nxtCost){
-                dist[nxt] = nxtCost;
-                pq.push(mp(nxtCost, nxt));
+                if(!in_q[nxtNode]){
+                    q.push(nxtNode);
+                    in_q[nxtNode] = true;
+                }
             }
-        }        
-    }
+        }
+    }   
 }
 
 int main()
 {
-    int k;
-    scanf("%d %d",&v,&e);
-    scanf("%d",&k);
-    
+    scanf("%d %d %d",&v,&e,&src);
     for(int i = 0; i < e; ++i){
         int a, b, c;
         scanf("%d %d %d",&a,&b,&c);
-        g[a].eb(mp(b, c));
+        g[a-1].emplace_back(b-1, c);
     }
-    dijkstra(k);
-    for(int i = 1; i <= v; ++i) dist[i]==1e9 ? puts("INF") : printf("%d\n",dist[i]);
+
+    spfa(src-1);
+    for(int i = 0; i < v; ++i) {
+        if(dist[i] == 1e9) puts("INF");
+        else printf("%d\n", dist[i]);
+    }
 }
