@@ -1,14 +1,7 @@
 
-C:\Users\Administrator\Desktop\PS-Study\BOJ>g++ -std=c++11 -O2 -o tmp/main Test.cpp 
+C:\Users\Administrator\Desktop\PS-Study\BOJ>g++ -std=c++11 -O2 -o tmp/main 3745.cpp 
 
 C:\Users\Administrator\Desktop\PS-Study\BOJ>tmp\main.exe  0<input.txt 
-0 Matched!
-1 Un Matched!
-2 Un Matched!
-3 Un Matched!
-4 Un Matched!
-5 Un Matched!
-6 Un Matched!
-7 Un Matched!
-8 Matched!
-9 Un Matched!
+3
+1
+1
