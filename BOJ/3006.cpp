@@ -52,13 +52,12 @@ int main()
     for(int i = 0; i < n; ++i){
         int pos;
         if(i % 2){            
-            pos = a[n-1 - i/2];
-            printf("%d\n", query(0, max(0, pos-1), 1, 0, n-1));
+            pos = a[n-i/2];
+            printf("%d\n", query(pos, n-1, 1, 0, n-1)-1);
         }else{
-            pos = a[i/2];
-            printf("%d\n", query(min(pos+1, n-1), n-1, 1, 0, n-1));
+            pos = a[i/2+1];
+            printf("%d\n", query(0, pos, 1, 0, n-1)-1);
         }
-        printf("pos : %d\n",pos);
         update(pos, 0, 1, 0, n-1);
     }
 }

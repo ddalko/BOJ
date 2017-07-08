@@ -1,0 +1,11 @@
+I really apologize for the ambiguity of this problem. We worked hard to make it concise and accurate, but we left out too many details.
+Basically, the idea is we want to overlay two of these pieces together so that no square has more than 1 X, and the region of X's forms a rectangle.
+Now for the solution:
+First, let's look at it backwards. I have a rectangle, and I cut it in two pieces. These two pieces have the same exact shape. What shapes can I form?
+A necessary and sufficient condition is that the piece itself is a rectangle itself! There are a few ways to check this. 
+One is, find the min/max x/y coordinates, and make sure the number of X's match the bounding box of all the points.
+
+C
+First, let's make all connected components cliques. This graph is still stable.
+Now, there are some components without special nodes. Where should we connect them?
+If there is a component with size A and a component with size B, we can add A*B edges if we connect these two components. So, it makes sense to choose the largest component.
