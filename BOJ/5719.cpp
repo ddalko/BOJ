@@ -2,56 +2,59 @@
 
 using namespace std;
 
-const int INF = 1e9;
+#define mp make_pair
+#define eb emplace_back
+typedef pair<int,int> pii;
 
-int s,d;
-int n,m,k;
-int dist[501];
-int g[501][501];
+int n, m;
+int s, d;
+int dist[505];
+int g[505][505];
 
 int dijkstra(int src)
 {
-	priority_queue<pair<int,int> > pq;
-	for(int i = 0; i < n; ++i) dist[i] = INF;
+	for(int i = 0; i < n; ++i) dist[i] = 1e9;
+
+	priority_queue<pii, vector<pii>, greater<pii> > pq;
 	dist[src] = 0;
+	pq.push(mp(0, src));
 
-	pq.push(make_pair(0, src));
-
-	while(pq.size()){
-		int here = pq.top().second;
-		int cost = -pq.top().first;
+	while(!pq.empty()){
+		int cur = pq.top().second;
+		int cost = pq.top().first;
 		pq.pop();
 
-		for(int nxt = 0; nxt < n; ++nxt)
-		{
-			if(g[here][nxt] != -1){
-				int nextCost = cost + g[here][nxt];
-				if(dist[nxt] > nextCost){
-					dist[nxt] = nextCost;
-					pq.push(make_pair(-nextCost, nxt));
+		if(dist[cur] < cost) continue;
+
+		for(int i = 0; i < n; ++i){
+			if(g[cur][i] != -1){
+				int nxt = i;
+				int nxtCost = cost + g[cur][i];
+
+				if(dist[nxt] > nxtCost){
+					dist[nxt] = nxtCost;
+					pq.push(mp(nxtCost, nxt));
 				}
 			}
 		}
 	}
-
 	return dist[d];
 }
 
-void backTrack(int dst)
+void backtrack(int dst)
 {
 	queue<int> q;
 	q.push(dst);
 
-	while(q.size())
-	{
-		int there = q.front();
+	while(!q.empty()){
+		int cur = q.front();
 		q.pop();
 
-		for(int t = 0; t < n; ++t){
-			if(g[t][there] != -1){
-				if(dist[there] == dist[t] + g[t][there]){
-					g[t][there] = -1;
-					q.push(t);
+		for(int src = 0; src < n; ++src){
+			if(g[src][cur] != -1){
+				if(dist[cur] == dist[src] + g[src][cur]){
+					g[src][cur] = -1;
+					q.push(src);
 				}
 			}
 		}
@@ -61,15 +64,17 @@ void backTrack(int dst)
 int main()
 {
 	while(scanf("%d %d",&n,&m), n != 0 || m != 0){
-		scanf("%d %d",&s,&d);
 		for(int i = 0; i < n; ++i) for(int j = 0; j < n; ++j) g[i][j] = -1;
+
+		scanf("%d %d",&s,&d);
 		for(int i = 0; i < m; ++i){
-			int u,v,p;
+			int u, v, p;
 			scanf("%d %d %d",&u,&v,&p);
 			g[u][v] = p;
 		}
-		int minDist = dijkstra(s);
-		backTrack(d);
-		printf("%d\n",(dijkstra(s) == INF) ? -1 : dijkstra(s));
+		dijkstra(s);
+		backtrack(d);
+		int ans = dijkstra(s);
+		(ans != 1e9) ? printf("%d\n",ans) : puts("-1");
 	}
 }

@@ -1,0 +1,8 @@
+
+C:\Users\Administrator\Desktop\PS-Study\SCPC\1st>g++ -std=c++11 -O2 -o tmp/main A.cpp 
+
+C:\Users\Administrator\Desktop\PS-Study\SCPC\1st>tmp\main.exe  0<input.txt 
+Case #1
+0
+Case #2
+0

@@ -1,41 +1,27 @@
 #include <cstdio>
 
-#define MIN(a,b) (((a)<(b))?(a):(b))
-
-typedef struct {
-	int x,y;
-}Matrix;
-
-int n;
-Matrix m[501];
-int dp[501][501];
-
-int mult(Matrix a,Matrix b){
-	return (a.y==b.x) ? a.x*b.x*b.y : 0;
-}
+int n, a, b;
+int d[505];
+int m[505][505];
 
 int main()
 {
-	scanf("%d",&n);
-	for(int i=0;i<n;++i)
-	{
-		int a,b;
-		scanf("%d %d",&a,&b);
-		m[i].x = a;
-		m[i].y = b;
-	}
+    scanf("%d",&n);
+    for(int i = 0; i < n; ++i){
+        scanf("%d %d",&a,&b);
+        d[i] = a;
+        d[i+1] = b;
+    }
 
-	for(int j=0;j<n-1;++j){
-		for(int i=0;i<n-j-1;++i){
-			int m1=mult(m[j+i],m[j+i+1]);
-			int m2=mult(m[i],m[i+1]);
-			printf("%d %d\n",m1,m2);
-			dp[i][j+i+1]=MIN(dp[i][j+i]+m1,dp[i+1][j+i+1]+m2);
-		}
-	}
-	for(int i=0;i<n;++i){
-		for(int j=0;j<n;++j) printf("%d ",dp[i][j]);
-		printf("\n");
-	}
-	printf("%d\n",dp[0][n-1]);
+    for(int i = 0; i <= n; ++i) for(int j = 0; j <= n; ++j) { m[i][j] = -1; m[i][i] = 0; }
+
+    for(int k = 1; k < n; ++k){
+        for(int i = 0; i < n - k; ++i){
+            for(int j = 0; j < k; ++j){
+                int c = m[i][i+j] + m[i+j+1][i+k] + d[i] * d[i+j+1] * d[i+k+1];
+                if(m[i][i+k] == -1 || m[i][i+k] > c) m[i][i+k] = c;
+            }
+        }
+    }
+    printf("%d\n", m[0][n-1]);
 }

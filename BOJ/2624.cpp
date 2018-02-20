@@ -1,30 +1,40 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
-int dp[101][10002];
-vector<pair<int,int>> c;
+struct coin{
+	int p;
+	int n;
+
+	bool operator < (const coin rhs) const
+	{
+		if(p != rhs.p) return p < rhs.p;
+		return n < rhs.n;
+	}
+};
+
+int T, k;
+coin c[105];
+int dp[2][10005];
 
 int main()
 {
-	int t,k;
-	scanf("%d %d",&t,&k);
-
-	for(int i=0;i<k;++i){
-		int a,b;
-		scanf("%d %d",&a,&b);
-		c.push_back(make_pair(a,b));
+	scanf("%d %d",&T,&k);
+	for(int i = 0; i < k; ++i) {
+		scanf("%d %d",&c[i].p,&c[i].n);
 	}
-	sort(c.begin(),c.end());
+	sort(c, c + k);
 
-	dp[0][0]=1;
-	for(int i=1;i<=k;++i){
-		for(int count=0;count<=c[i-1].second;++count){
-			for(int j=0;j<=t;++j){
-				if(j+c[i-1].first*count>t) break;
-				else dp[i][j+c[i-1].first*count]+=dp[i-1][j];
+	dp[0][0] = 1;
+	for(int i = 0; i < k; ++i){
+		for(int j = 0; j <= c[i].n; ++j){
+			for(int l = 0; l <= T; ++l){
+				if(l + c[i].p * j > T) break;
+				dp[(i+1)%2][l + j * c[i].p] += dp[i%2][l];
 			}
 		}
 	}
-	printf("%d\n",dp[k][t]);
+
+	printf("%d\n", dp[k%2][T]);
 }
